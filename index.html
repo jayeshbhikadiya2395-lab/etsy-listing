@@ -221,6 +221,16 @@
 
                 <div class="panel-body results-container">
                     
+                    <!-- Quick Copy Dashboard -->
+                    <div class="quick-copy-bar" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 0.5rem; padding: 1.2rem; background: rgba(212, 175, 55, 0.05); border: 1px solid var(--border-gold); border-radius: 12px; flex-shrink: 0; box-shadow: var(--shadow-glow);">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold-solid); display: flex; align-items: center; width: 100%; margin-bottom: 6px; font-weight: 600;"><i class="fa-solid fa-bolt-lightning" style="margin-right: 8px; animation: pulseGlow 1.5s infinite ease-in-out;"></i> Quick Copy Dashboard</span>
+                        <button class="quick-copy-item" onclick="copyField('title-output', this)" style="flex-grow: 1;"><i class="fa-solid fa-heading"></i> Copy Title</button>
+                        <button class="quick-copy-item" onclick="copyField('tags-output-plain', this)" style="flex-grow: 1;"><i class="fa-solid fa-tags"></i> Copy Tags</button>
+                        <button class="quick-copy-item" onclick="copyField('description-output', this)" style="flex-grow: 1;"><i class="fa-solid fa-align-left"></i> Copy Description</button>
+                        <button class="quick-copy-item" onclick="copyField('caption-output', this)" style="flex-grow: 1;"><i class="fa-solid fa-pinterest"></i> Copy Caption</button>
+                        <button class="quick-copy-item" onclick="copyField('price-output-val', this)" style="flex-grow: 1;"><i class="fa-solid fa-dollar-sign"></i> Copy Price</button>
+                    </div>
+
                     <!-- Title Output Card -->
                     <div class="result-card">
                         <div class="card-header">
