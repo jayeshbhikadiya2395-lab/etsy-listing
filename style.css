@@ -801,3 +801,40 @@ code {
     border: 1px solid rgba(248, 113, 113, 0.2);
     color: #F87171;
 }
+
+/* Quick Copy Dashboard Button Styles */
+.quick-copy-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-speed) ease;
+}
+
+.quick-copy-item:hover {
+    border-color: var(--gold-solid);
+    color: var(--gold-solid);
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.15);
+}
+
+.quick-copy-item:active {
+    transform: translateY(0);
+}
+
+.quick-copy-item.copied {
+    border-color: var(--accent-green) !important;
+    color: var(--accent-green) !important;
+    background: rgba(74, 222, 128, 0.08) !important;
+    box-shadow: 0 4px 10px rgba(74, 222, 128, 0.15) !important;
+}
