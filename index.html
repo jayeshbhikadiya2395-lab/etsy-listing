@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucent Carat Lab | Luxury Etsy Listing Generator</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <header class="app-header">
+            <div class="logo-area">
+                <i class="fa-solid fa-gem gold-sparkle"></i>
+                <div class="brand-text">
+                    <h1>LUCENT CARAT</h1>
+                    <span>L A B</span>
+                </div>
+            </div>
+            <p class="tagline">Luxury Etsy Listing Generator</p>
+            <div class="presets-section">
+                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Quick Presets</h3>
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="loadPreset('ovalHalo')">Oval Halo Engagement</button>
+                    <button class="preset-btn" onclick="loadPreset('classicSolitaire')">Round Solitaire Classic</button>
+                    <button class="preset-btn" onclick="loadPreset('emeraldEternity')">Emerald Cut Eternity</button>
+                </div>
+            </div>
+            <div class="footer-note">
+                <p>&copy; 2026 Lucent Carat Lab</p>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Inputs Panel (Left) -->
+            <section class="panel editor-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-sliders"></i> Jewelry Specifications</h2>
+                    <button class="reset-btn" onclick="resetForm()"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+                </div>
+
+                <div class="panel-body">
+                    <form id="listing-form" onsubmit="event.preventDefault();">
+                        <!-- Section 1: The Diamond -->
+                        <div class="form-section">
+                            <h3 class="section-title"><span class="section-num">01</span> The Center Stone</h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="diamond-shape">Diamond Shape</label>
+                                    <select id="diamond-shape" onchange="generateListing()">
+                                        <option value="Oval">Oval Cut</option>
+                                        <option value="Round">Round Brilliant</option>
+                                        <option value="Emerald">Emerald Cut</option>
+                                        <option value="Radiant">Radiant Cut</option>
+                                        <option value="Cushion">Cushion Cut</option>
+                                        <option value="Pear">Pear Cut</option>
+                                        <option value="Marquise">Marquise Cut</option>
+                                        <option value="Princess">Princess Cut</option>
+                                        <option value="Asscher">Asscher Cut</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carat-weight">Carat Weight</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="carat-weight" step="0.05" min="0.1" value="2.00" oninput="generateListing()">
+                                        <span class="input-suffix">CT</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="diamond-color">Color Grade</label>
+                                    <select id="diamond-color" onchange="generateListing()">
+                                        <option value="D">D (Colorless)</option>
+                                        <option value="E" selected>E (Colorless)</option>
+                                        <option value="F">F (Colorless)</option>
+                                        <option value="G">G (Near Colorless)</option>
+                                        <option value="H">H (Near Colorless)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="diamond-clarity">Clarity Grade</label>
+                                    <select id="diamond-clarity" onchange="generateListing()">
+                                        <option value="FL">FL (Flawless)</option>
+                                        <option value="IF">IF (Internally Flawless)</option>
+                                        <option value="VVS1" selected>VVS1 (Very Very Slightly Included)</option>
+                                        <option value="VVS2">VVS2 (Very Very Slightly Included)</option>
+                                        <option value="VS1">VS1 (Very Slightly Included)</option>
+                                        <option value="VS2">VS2 (Very Slightly Included)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="diamond-cut">Cut Grade</label>
+                                    <select id="diamond-cut" onchange="generateListing()">
+                                        <option value="Ideal">Ideal</option>
+                                        <option value="Excellent" selected>Excellent</option>
+                                        <option value="Very Good">Very Good</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="certification">Certification</label>
+                                    <input type="text" id="certification" value="IGI Certified" placeholder="e.g. IGI Certified" oninput="generateListing()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: The Setting -->
+                        <div class="form-section">
+                            <h3 class="section-title"><span class="section-num">02</span> The Setting</h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="ring-style">Ring Style</label>
+                                    <select id="ring-style" onchange="toggleCustomStyle(this.value); generateListing();">
+                                        <option value="Solitaire">Solitaire Ring</option>
+                                        <option value="Halo" selected>Halo Engagement Ring</option>
+                                        <option value="Three-Stone">Three-Stone Ring</option>
+                                        <option value="Eternity">Eternity Band</option>
+                                        <option value="Vintage">Vintage Inspired Ring</option>
+                                        <option value="Toi et Moi">Toi et Moi Ring</option>
+                                        <option value="Pavé">Classic Pavé Ring</option>
+                                        <option value="Custom">Custom...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="custom-style-group" style="display: none;">
+                                    <label for="custom-ring-style">Custom Ring Style Name</label>
+                                    <input type="text" id="custom-ring-style" value="" placeholder="e.g., Twisted Vine" oninput="generateListing()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metal-type">Metal Type & Gold Karat</label>
+                                    <select id="metal-type" onchange="generateListing()">
+                                        <option value="14K Solid White Gold">14K White Gold</option>
+                                        <option value="14K Solid Yellow Gold" selected>14K Yellow Gold</option>
+                                        <option value="14K Solid Rose Gold">14K Rose Gold</option>
+                                        <option value="18K Solid Yellow Gold">18K Yellow Gold</option>
+                                        <option value="18K Solid White Gold">18K White Gold</option>
+                                        <option value="Platinum">950 Platinum</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="band-width">Band Width (mm)</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="band-width" step="0.1" min="1.0" value="1.8" oninput="generateListing()">
+                                        <span class="input-suffix">mm</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accent-stones">Accent/Side Stones</label>
+                                    <input type="text" id="accent-stones" value="0.45 CT Round Brilliant Diamonds (VVS/E-F)" placeholder="None, or details..." oninput="generateListing()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Cost & Pricing -->
+                        <div class="form-section">
+                            <h3 class="section-title"><span class="section-num">03</span> Cost & Pricing Model</h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="materials-cost">Materials Cost ($)</label>
+                                    <div class="input-wrapper prefix">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="materials-cost" min="0" value="450" oninput="generateListing()">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="labor-cost">Labor Cost ($)</label>
+                                    <div class="input-wrapper prefix">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="labor-cost" min="0" value="200" oninput="generateListing()">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="overhead-rate">Overhead (%)</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="overhead-rate" min="0" max="100" value="20" oninput="generateListing()">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="luxury-markup">Luxury Markup (%)</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="luxury-markup" min="0" value="120" oninput="generateListing()">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Extra Options -->
+                        <div class="form-section">
+                            <h3 class="section-title"><span class="section-num">04</span> Shipping & Options</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="shipping-time">Shipping Duration</label>
+                                    <input type="text" id="shipping-time" value="Free Express Worldwide Shipping (3-5 business days)" placeholder="e.g. Ships in 2 weeks" oninput="generateListing()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="warranty">Warranty details</label>
+                                    <input type="text" id="warranty" value="Lifetime Manufacturing Warranty & Certificate of Authenticity" placeholder="Warranty details" oninput="generateListing()">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Outputs Panel (Right) -->
+            <section class="panel viewer-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Generated Listing</h2>
+                    <button class="primary-btn" onclick="copyAllJSON()"><i class="fa-solid fa-copy"></i> Copy Full JSON</button>
+                </div>
+
+                <div class="panel-body results-container">
+                    
+                    <!-- Title Output Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge">Etsy SEO Title</span>
+                                <div class="char-count" id="title-char-count">0 / 80</div>
+                            </div>
+                            <button class="copy-btn" onclick="copyField('title-output', this)">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="output-text" id="title-output" contenteditable="true" oninput="updateCharCount()"></div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Format: <strong>[Shape] [Carat] Lab-Grown Diamond [Style] [Metal] | Engagement Ring</strong>. Keep between 60-80 characters for optimal Etsy SEO ranking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tags Output Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge">13 Etsy Tags</span>
+                                <div class="tag-counter" id="tag-count">0 / 13 Tags</div>
+                            </div>
+                            <button class="copy-btn" onclick="copyField('tags-output-plain', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Tags (CSV)
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <!-- Visual Tag Badges -->
+                            <div class="tags-container" id="tags-output-visual"></div>
+                            <!-- Hidden input for raw copying -->
+                            <input type="hidden" id="tags-output-plain">
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Includes Main, Long-tail, Trend, Buyer Intent, Material, Occasion, and synonyms. Each tag must be 20 chars or less.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Card -->
+                    <div class="result-card pricing-card-bg">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge badge-gold">Pricing Calculator</span>
+                            </div>
+                            <button class="copy-btn btn-gold" onclick="copyField('price-output-val', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Price
+                            </button>
+                        </div>
+                        <div class="card-content pricing-layout">
+                            <div class="final-price-box">
+                                <span class="label">Suggested Retail Price</span>
+                                <span class="value" id="price-output">$0.00</span>
+                                <span class="val-raw" style="display:none;" id="price-output-val">0.00</span>
+                            </div>
+                            <div class="price-breakdown">
+                                <h4>Formula Calculation:</h4>
+                                <ul>
+                                    <li><span class="break-label">Materials Cost (×3):</span> <span class="break-val" id="break-materials">$0.00</span></li>
+                                    <li><span class="break-label">Labor Cost:</span> <span class="break-val" id="break-labor">$0.00</span></li>
+                                    <li><span class="break-label">Overhead:</span> <span class="break-val" id="break-overhead">$0.00</span></li>
+                                    <li><span class="break-label">Subtotal:</span> <span class="break-val" id="break-subtotal">$0.00</span></li>
+                                    <li><span class="break-label">Luxury Markup:</span> <span class="break-val" id="break-markup">$0.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description Output Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge">Luxury Description</span>
+                                <div class="word-count" id="desc-word-count">0 words</div>
+                            </div>
+                            <button class="copy-btn" onclick="copyField('description-output', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Description
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="output-text html-formatted" id="description-output" contenteditable="true" oninput="updateWordCount()"></div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Luxury description containing an opening hook, detailed 4Cs chart, lab-grown benefits, shipping details, and custom options (200-300 words).</p>
+                        </div>
+                    </div>
+
+                    <!-- Pin-Worthy Caption Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge">Pin-Worthy Pinterest Caption</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyField('caption-output', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Caption
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="output-text text-italic" id="caption-output" contenteditable="true"></div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Search-optimized caption with relevant luxury hashtags, designed to convert on Pinterest.</p>
+                        </div>
+                    </div>
+
+                    <!-- Raw JSON Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge badge-code">Structured Listing JSON</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyField('json-output', this)">
+                                <i class="fa-regular fa-copy"></i> Copy JSON
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <pre><code class="language-json" id="json-output"></code></pre>
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Full structured JSON data ready for bulk imports, catalog records, or API integrations.</p>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Push Card -->
+                    <div class="result-card github-card-bg">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge badge-github"><i class="fa-brands fa-github"></i> Publish to GitHub</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="github-form" style="display: flex; flex-direction: column; width: 100%;">
+                                <div class="form-group full-width">
+                                    <label for="gh-pat" style="margin-bottom: 4px; display: block;">GitHub Personal Access Token (PAT)</label>
+                                    <div class="input-wrapper">
+                                        <input type="password" id="gh-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width: 100%;">
+                                    </div>
+                                    <span class="helper-link" style="margin-top: 6px; display: block; font-size: 0.75rem;"><a href="https://github.com/settings/tokens/new?scopes=repo&description=Etsy%20Listing%20Generator" target="_blank" rel="noopener" style="color: var(--gold-solid); text-decoration: none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Click here to generate a Token on GitHub (must check "repo" scope)</a></span>
+                                </div>
+                                <div class="form-grid" style="margin-top: 1rem; width: 100%;">
+                                    <div class="form-group">
+                                        <label for="gh-repo">Repository Path</label>
+                                        <input type="text" id="gh-repo" value="jayeshbhikadiya2395-lab/etsy-listing">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gh-branch">Branch</label>
+                                        <input type="text" id="gh-branch" value="main">
+                                    </div>
+                                </div>
+                                <div class="github-publish-action" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: stretch; width: 100%;">
+                                    <button class="primary-btn btn-github" onclick="publishToGitHub()" style="justify-content: center; width: 100%; background: #24292e; color: #ffffff; border: 1px solid rgba(255,255,255,0.15);"><i class="fa-brands fa-github"></i> Publish Code Now</button>
+                                    <div id="gh-status" class="gh-status-text" style="display: none; padding: 0.75rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="guide-text"><i class="fa-solid fa-circle-info"></i> Uploads `index.html`, `style.css`, `app.js`, and `server.js` directly to your GitHub repo using HTTPS API. No Git CLI installation required.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Generator Script -->
+    <script src="app.js"></script>
+</body>
+</html>
